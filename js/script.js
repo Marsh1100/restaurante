@@ -19,8 +19,10 @@ listarCateg()
 //Selección de categoria
 
 $selectorCateg.addEventListener('input',seleccionCateg);
-export const carritoDeCompras = new CarritoDeCompras();
 
 document.addEventListener('click', e=>{
-  console.log(e.target.classList.value)
+  if(e.target.classList.value.includes('carrito')){
+    let id= e.target.parentNode.id;
+    console.log(id)
+  }
 })

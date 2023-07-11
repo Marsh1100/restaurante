@@ -1,6 +1,5 @@
 import { $selectorCateg, $tarjetasCateg } from "./selectores.js";
 import {ProductoCarrito,CarritoDeCompras} from "../Class/Carrito.js"
-import {carritoDeCompras} from "./script.js"
 
 export function listarCateg(){
     let url = "https://www.themealdb.com/api/json/v1/1/categories.php"
@@ -9,8 +8,7 @@ export function listarCateg(){
         .then(data => mostrarCategoria(data))
 }
 
-
-
+const carritoDeCompras = new CarritoDeCompras();
 
 function mostrarCategoria(data){
     $selectorCateg.innerHTML = '<option selected value="Categoria">Categoria</option>'
@@ -48,7 +46,7 @@ function mostrarComidas(data){
                     <div class="card-body">
                         <p class="card-text"><b>${strMeal}</b></p>
                         <button type="button" class="btn btn-success carrito" id="${idMeal}" >
-                        <i class="bi bi-cart-plus carrito"></i>
+                            <i class="bi bi-cart-plus carrito"></i>
                         </button>
                     </div>
                 </div>`;
