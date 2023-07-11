@@ -1,0 +1,89 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header{
+    text-align: center;
+    height: 8vh;
+}
+
+
+main{
+    height: 87vh;
+    width: 100%;
+    background-image: url(https://static.vecteezy.com/system/resources/previews/013/425/433/non_2x/dinner-table-set-in-restaurant-at-night-free-photo.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+footer{
+    height: 5vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.selectorCarrito{
+    display: flex;
+    align-items: center;
+
+    margin: auto;
+    width: 40%;
+
+    opacity:1;
+
+
+}
+
+.bi-cart4{
+    background-color: white;
+    color: rgb(17, 97, 218);
+    border-radius: 10px;
+}
+#carrito{
+    border: none;
+    background-color: transparent;
+
+    display: flex;
+    --bs-btn-padding-y: .25rem;
+     --bs-btn-padding-x: .5rem; 
+     --bs-btn-font-size: 2rem; 
+}
+
+tr{
+    vertical-align: middle;
+}
+
+#tarjetas-categoria{
+    height: 80vh;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap:25px;
+    overflow-y: scroll;
+}
+
+/*Barra de scroll*/
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+/* Track */
+::-webkit-scrollbar-track {
+background: #200303; 
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+background: #ecebeb; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+background: #555; 
+}
