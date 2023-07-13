@@ -2,10 +2,10 @@
 
 
 export class ProductoCarrito{
-    constructor(nombre,imgUrl,precio,cantidad){
+    constructor(nombre,imgUrl,cantidad){
       this.nombre=nombre;
       this.imgUrl=imgUrl;
-      this.precio=precio;
+      //this.precio=precio;
       this.cantidad=cantidad;
     }
 }

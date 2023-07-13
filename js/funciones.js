@@ -1,5 +1,7 @@
 import { $selectorCateg, $tarjetasCateg } from "./selectores.js";
-import {ProductoCarrito,CarritoDeCompras} from "../Class/Carrito.js"
+import {ProductoCarrito,CarritoDeCompras} from "../Class/Carrito.js";
+
+
 
 export function listarCateg(){
     let url = "https://www.themealdb.com/api/json/v1/1/categories.php"
@@ -8,7 +10,9 @@ export function listarCateg(){
         .then(data => mostrarCategoria(data))
 }
 
+const productoCarrito = new ProductoCarrito();
 const carritoDeCompras = new CarritoDeCompras();
+
 
 function mostrarCategoria(data){
     $selectorCateg.innerHTML = '<option selected value="Categoria">Categoria</option>'
@@ -45,8 +49,8 @@ function mostrarComidas(data){
                     <img src="${strMealThumb}" class="card-img-top" alt="...">
                     <div class="card-body">
                         <p class="card-text"><b>${strMeal}</b></p>
-                        <button type="button" class="btn btn-success carrito" id="${idMeal}" >
-                            <i class="bi bi-cart-plus carrito"></i>
+                        <div>
+                        <button type="button" class="btn btn-success bi bi-cart-plus carrito" id="${idMeal}" >
                         </button>
                     </div>
                 </div>`;
@@ -55,12 +59,29 @@ function mostrarComidas(data){
     })
     
 }
+//AddEventListener
+$selectorCateg.addEventListener('input',seleccionCateg);
 
+$tarjetasCateg.addEventListener('click', e=>{
+    if(e.target.classList.value.includes('carrito')){
+      let id= e.target.id; 
+      
+        let url = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
 
-export function agregarAlCarrito(){
+        fetch(url)
+        .then(response => response.json())
+        .then(data => agregarAlCarrito(data.meals[0]))
 
-    console.log("goalsldas")
-    /*const carrito = carritoDeCompras.getProductosCarrito();
+    };
+  })
+  
+
+export function agregarAlCarrito(plato){
+
+    console.log("aaaaa");
+    const {strMeal,strMealThumb} = plato;
+
+    const carrito = carritoDeCompras.getProductosCarrito();
   
     //Saber si ya existe el producto en el carrito!
     let existe = false;
@@ -74,9 +95,9 @@ export function agregarAlCarrito(){
     });
 
     if(!existe){
-        let newProducto = new ProductoCarrito(strMeal,strMealThumb,precio,cantidad)
+        let newProducto = new ProductoCarrito(strMeal,strMealThumb,1)
         carritoDeCompras.addProductoCarrito(newProducto)
-      }
-      console.log(carritoDeCompras.getProductosCarrito());
-      //renderCarritoCompra();*/
+    }
+    console.log(carritoDeCompras.getProductosCarrito());
+      //renderCarritoCompra();
 }
