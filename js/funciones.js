@@ -1,4 +1,4 @@
-import { $selectorCateg, $tarjetasCateg } from "./selectores.js";
+import { $selectorCateg, $tarjetasCateg, $pedido } from "./selectores.js";
 import {ProductoCarrito,CarritoDeCompras} from "../Class/Carrito.js";
 
 
@@ -72,14 +72,19 @@ $tarjetasCateg.addEventListener('click', e=>{
         .then(response => response.json())
         .then(data => agregarAlCarrito(data.meals[0]))
 
+    }
+  });
+$pedido.addEventListener('click', e=>{
+    if(e.target.classList.value.includes('bi-trash3')){
+        let index= e.target.id; 
+        removeProducto(index);
     };
-  })
-  
+})
 
 export function agregarAlCarrito(plato){
 
-    console.log("aaaaa");
     const {strMeal,strMealThumb} = plato;
+    const cantidad =1;
 
     const carrito = carritoDeCompras.getProductosCarrito();
   
@@ -87,17 +92,45 @@ export function agregarAlCarrito(plato){
     let existe = false;
     
     carrito.forEach((e,i)=>{
-      if(e.nombre == nombre){
+      if(e.nombre == strMeal){
         existe = true;
-        carritoDeCompras.editCantProducto(i,cantidad)
+        carritoDeCompras.editCantProducto(i,cantidad);
         return
       }
     });
 
     if(!existe){
-        let newProducto = new ProductoCarrito(strMeal,strMealThumb,1)
-        carritoDeCompras.addProductoCarrito(newProducto)
+        let newProducto = new ProductoCarrito(strMeal,strMealThumb,cantidad);
+        carritoDeCompras.addProductoCarrito(newProducto);
     }
     console.log(carritoDeCompras.getProductosCarrito());
-      //renderCarritoCompra();
+
+    renderCarritoCompra();
+}
+
+function renderCarritoCompra(){
+    $pedido.innerHTML=" ";
+    const carrito = carritoDeCompras.getProductosCarrito();
+
+    carrito.forEach((producto,index)=>{
+        const {nombre, imgUrl,cantidad} = producto;
+        let html =`<tr>
+                        <th scope="row">${cantidad}</th>
+                        <td>
+                            <img src="${imgUrl}" alt="${nombre}.png" style="width: 100px;">
+                        </td>
+                        <td>${nombre}</td>
+                        <td>
+                            <button type="button" class="btn btn-danger bi bi-trash3" id="${index}"></button>
+                        </td>
+                    </tr>`;
+        
+        $pedido.insertAdjacentHTML('beforeend', html);
+    })
+}
+
+
+function removeProducto(index){
+    carritoDeCompras.removeProducto(index);
+    renderCarritoCompra();
 }

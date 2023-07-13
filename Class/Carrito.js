@@ -1,6 +1,4 @@
 
-
-
 export class ProductoCarrito{
     constructor(nombre,imgUrl,cantidad){
       this.nombre=nombre;
